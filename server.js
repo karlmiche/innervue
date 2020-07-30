@@ -30,7 +30,17 @@ const mongooseOptions = {
   useCreateIndex: true
 };
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/innervuedb', mongooseOptions);
+const uri = process.env.MONGOD_URI
+
+mongoose.connect(uri || 'mongodb://localhost/innervuedb', mongooseOptions);
+
+const MongoClient = require('mongodb').MongoClient;
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 const db = mongoose.connection;
 

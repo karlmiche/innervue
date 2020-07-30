@@ -50,7 +50,6 @@ const FeedbackForm = (props) => {
 
     useEffect(() => {
         if (interimTranscript !== '') {
-            // console.log('Got interim result:', interimTranscript)
             setInputs({
                 answer: transcript,
                 content: props.selectedQuestion,
